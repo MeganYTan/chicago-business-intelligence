@@ -3,23 +3,23 @@ steps:
 - name: "gcr.io/cloud-builders/docker"
   args: ['pull', 'dpage/pgadmin4']
 - name: "gcr.io/cloud-builders/docker"
-  args: ['tag', 'dpage/pgadmin4','gcr.io/atomic-airship-404501/pgadmin']
+  args: ['tag', 'dpage/pgadmin4','gcr.io/pivotal-data-406222/pgadmin']
 - name: "gcr.io/cloud-builders/docker"
-  args: ['push', 'gcr.io/atomic-airship-404501/pgadmin']
+  args: ['push', 'gcr.io/pivotal-data-406222/pgadmin']
 #deply pg-admin
 - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
   entrypoint: gcloud
-  args: ['run', 'deploy','pg-admin', '--image','gcr.io/atomic-airship-404501/pgadmin', '--region','us-central1', '--add-cloudsql-instances', 'atomic-airship-404501:us-central1:mypostgres','--platform','managed', '--port','80', '--allow-unauthenticated','--set-env-vars','PGADMIN_DEFAULT_EMAIL=user@gmail.com','--set-env-vars','PGADMIN_DEFAULT_PASSWORD=SuperSecret']
+  args: ['run', 'deploy','pg-admin', '--image','gcr.io/pivotal-data-406222/pgadmin', '--region','us-central1', '--add-cloudsql-instances', 'pivotal-data-406222:us-central1:mypostgres','--platform','managed', '--port','80', '--allow-unauthenticated','--set-env-vars','PGADMIN_DEFAULT_EMAIL=user@gmail.com','--set-env-vars','PGADMIN_DEFAULT_PASSWORD=SuperSecret']
   
 # Steps to build a docker image for go-microservice, push it to container registry and deploy it to cloud run.  
 - name: "gcr.io/cloud-builders/docker"
-  args: ['build', '-t', 'gcr.io/atomic-airship-404501/go-microservice','.']
+  args: ['build', '-t', 'gcr.io/pivotal-data-406222/go-microservice','.']
 - name: "gcr.io/cloud-builders/docker"
-  args: ['push', 'gcr.io/atomic-airship-404501/go-microservice']
+  args: ['push', 'gcr.io/pivotal-data-406222/go-microservice']
   
 - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
   entrypoint: gcloud
-  args: ['run', 'deploy','go-microservice', '--image','gcr.io/atomic-airship-404501/go-microservice', '--region','us-central1', '--add-cloudsql-instances', 'atomic-airship-404501:us-central1:mypostgres','--platform','managed', '--port','8080', '--allow-unauthenticated']
+  args: ['run', 'deploy','go-microservice', '--image','gcr.io/pivotal-data-406222/go-microservice', '--region','us-central1', '--add-cloudsql-instances', 'pivotal-data-406222:us-central1:mypostgres','--platform','managed', '--port','8080', '--allow-unauthenticated']
 images:
-- gcr.io/atomic-airship-404501/go-microservice
-- gcr.io/atomic-airship-404501/pgadmin
+- gcr.io/pivotal-data-406222/go-microservice
+- gcr.io/pivotal-data-406222/pgadmin

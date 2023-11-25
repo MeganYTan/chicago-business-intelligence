@@ -24,7 +24,7 @@ package main
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 
-// trip_id	"c354c843908537bbf90997917b714f1c63723785"
+// trip_id	"c354c843908537bbf90997917b714f1c63723785"c:\Users\megta\Desktop\School\Fall 2023\CS588 Software Eng\Tutorials\Tutorial 7 - Google Cloud\3. GCP-Docker-PG-Go_Source_code\main.go
 // trip_start_timestamp	"2021-11-13T22:45:00.000"
 // trip_end_timestamp	"2021-11-13T23:00:00.000"
 // trip_seconds	"703"
@@ -190,12 +190,12 @@ func main() {
 	
 
 	// db, err := sql.Open("postgres", db_connection)
-	// if err != nil {
+	// if err != nil {log.
 	// 	panic(err)
 	// }
 
 	// Database connection settings
-	connectionName := "atomic-airship-404501:us-central1:mypostgres"
+	connectionName := "pivotal-data-406222:us-central1:mypostgres"
 	dbUser := "postgres"
 	dbPass := "root"
 	dbName := "chicago_business_intelligence"
@@ -282,7 +282,7 @@ func GetTaxiTrips(db *sql.DB) error {
 	// Get your geocoder.ApiKey from here :
 	// https://developers.google.com/maps/documentation/geocoding/get-api-key?authuser=2
 
-	geocoder.ApiKey = "API-KEY"
+	geocoder.ApiKey = "AIzaSyDRC8yYEAcr5IhKBiHyvMB--cU1aqG_aAs"
 
 	
 
