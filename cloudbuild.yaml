@@ -20,6 +20,30 @@ steps:
 - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
   entrypoint: gcloud
   args: ['run', 'deploy','go-microservice', '--image','gcr.io/pivotal-data-406222/go-microservice', '--region','us-central1', '--add-cloudsql-instances', 'pivotal-data-406222:us-central1:mypostgres','--platform','managed', '--port','8080', '--allow-unauthenticated']
+
+    # Build the Docker image
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/prometheus', '.']
+
+  # Push the image to Google Container Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/prometheus']
+
+  # Deploy the image to Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'prometheus'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/prometheus'
+      - '--platform'
+      - 'managed'
+      - '--region'
+      - 'your-region'  # replace with your desired region
+      - '--allow-unauthenticated'  # consider authentication for security
 images:
 - gcr.io/pivotal-data-406222/go-microservice
 - gcr.io/pivotal-data-406222/pgadmin
+- 'gcr.io/pivotal-data-406222/prometheus'

@@ -1,0 +1,5 @@
+scrape_configs:
+  - job_name: 'go-application-prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['prometheus-db7f5o2xua-uc.a.run.app']
