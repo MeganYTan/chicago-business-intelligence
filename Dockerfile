@@ -13,17 +13,17 @@ RUN go build -o /main
 CMD [ "/main" ]
 
 # # Use the official Prometheus image as a base
-FROM prom/prometheus:v2.33.1
-# Expose the port Prometheus runs on
-ENV PORT 9090
-ENV HOSTDIR 0.0.0.0
-EXPOSE 9090
-# Set the working directory in the container
-WORKDIR /etc/prometheus
-# Copy your configuration file into the container
-COPY prometheus.yml /etc/prometheus/prometheus.yml
-# Run Prometheus
-CMD [ "--config.file=/etc/prometheus/prometheus.yml", \
-      "--storage.tsdb.path=/prometheus", \
-      "--web.enable-lifecycle", \
-      "--web.enable-admin-api" ]
+# FROM prom/prometheus:v2.33.1
+# # Expose the port Prometheus runs on
+# ENV PORT 9090
+# ENV HOSTDIR 0.0.0.0
+# EXPOSE 9090
+# # Set the working directory in the container
+# WORKDIR /etc/prometheus
+# # Copy your configuration file into the container
+# COPY prometheus.yml /etc/prometheus/prometheus.yml
+# # Run Prometheus
+# CMD [ "--config.file=/etc/prometheus/prometheus.yml", \
+#       "--storage.tsdb.path=/prometheus", \
+#       "--web.enable-lifecycle", \
+#       "--web.enable-admin-api" ]
