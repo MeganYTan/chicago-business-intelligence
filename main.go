@@ -4,6 +4,8 @@ import (
     "net/http"
     "time"
     "log"
+    "os"
+    "fmt"
     "github.com/prometheus/client_golang/prometheus"
     "github.com/prometheus/client_golang/prometheus/promhttp"
 )
@@ -31,6 +33,18 @@ func makeAPICall() {
 }
 
 func main() {
+    port := os.Getenv("PORT")
+	if port == "" {
+        port = "8080"
+	}
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+        w.Write([]byte("Hello, world!"))
+    })
+	go func() {
+		log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
+	}()
+
+
     http.Handle("/metrics", promhttp.Handler()) // Expose the metrics
     go makeAPICall()
     log.Fatal(http.ListenAndServe(":8080", nil))
