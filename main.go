@@ -7,7 +7,7 @@ import (
     "os"
     "fmt"
     "github.com/prometheus/client_golang/prometheus"
-    // "github.com/prometheus/client_golang/prometheus/promhttp"
+    "github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 var (
@@ -45,9 +45,9 @@ func main() {
 	}()
 
 
-    // http.Handle("/metrics", promhttp.Handler()) // Expose the metrics
-    // go makeAPICall()
-    // log.Fatal(http.ListenAndServe(":9090", nil))
+    http.Handle("/metrics", promhttp.Handler()) // Expose the metrics
+    go makeAPICall()
+    log.Fatal(http.ListenAndServe(":9090", nil))
 
     for {
 		// build and fine-tune functions to pull data from different data sources
