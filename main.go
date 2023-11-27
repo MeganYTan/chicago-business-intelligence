@@ -200,6 +200,11 @@ func main() {
 	dbPass := "root"
 	dbName := "chicago_business_intelligence"
 
+	// connectionName := "assignment-5-406009:us-central1:mypostgres"
+	// dbUser := "postgres"
+	// dbPass := "root"
+	// dbName := "assignment-5"
+
 	dbURI := fmt.Sprintf("host=%s dbname=%s user=%s password=%s sslmode=disable",
 		connectionName, dbName, dbUser, dbPass)
 
