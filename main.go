@@ -47,7 +47,7 @@ func main() {
 
     http.Handle("/metrics", promhttp.Handler()) // Expose the metrics
     go makeAPICall()
-    log.Fatal(http.ListenAndServe(":8080", nil))
+    log.Fatal(http.ListenAndServe(":9090", nil))
 
     for {
 		// build and fine-tune functions to pull data from different data sources
