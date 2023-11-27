@@ -28,4 +28,4 @@ CMD [ "/main" ]
 # CMD [ "--config.file=/etc/prometheus/prometheus.yml", \
 #       "--storage.tsdb.path=/prometheus", \
 #       "--web.enable-lifecycle", \
-      "--web.enable-admin-api" ]
+      # "--web.enable-admin-api" ]
