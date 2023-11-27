@@ -120,7 +120,45 @@ func main() {
 		log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 	}()
 	
+    // // github
+    topics := []string{"Selenium", "Docker", "Milvus"}
+    daysList := []int{2, 7, 45} // List of timeframes to check
 
+    for _, days := range daysList {
+        log.Printf("Fetching issues for the past %d days\n", days)
+        for _, topic := range topics {
+            err := fetchAndStoreIssues(db, topic, days)
+            if err != nil {
+                log.Println(err)
+                continue
+            }
+        }
+    }
+
+    repos := []string{"prometheus/prometheus", "golang/go"}
+    for _, days := range daysList {
+        log.Printf("Fetching issues for the past %d days\n", days)
+        for _, repo := range repos {
+            issues, err := getRepoLastNDaysGitHubIssues(repo, days)
+            if err != nil {
+                log.Println(err)
+                continue
+            }
+
+            if len(issues) == 0 {
+                log.Printf("No new issues found for %s\n", repo)
+                continue
+            }
+
+            err = insertIssues(db, issues, days)
+            if err != nil {
+                log.Printf("Error inserting issues for %s into database: %v\n", repo, err)
+                continue
+            }
+
+            log.Printf("Successfully inserted %d issues for %s into the database.\n", len(issues), repo)
+        }
+    }
 
 	// Spin in a loop and pull data from the city of chicago data portal
 	// Once every hour, day, week, etc.
